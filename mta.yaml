@@ -1,0 +1,88 @@
+####### Generated mta.yaml based on template version 0.2.0
+####### appName = mycap2
+####### language=nodejs; multiTenant=
+####### approuter=
+
+_schema-version: '3.1'
+ID: mycap2
+version: 1.0.0
+description: "A simple CAP project."
+
+build-parameters:
+  before-all:
+   - builder: custom
+     commands:
+      - npm install
+      - cds build/all
+
+parameters:
+  enable-parallel-deployments: true  
+
+modules:
+ ##############    SERVER MODULE   ##########################
+ - name: mycap2-srv
+   type: nodejs
+   path: gen/srv
+   properties:
+     EXIT: 1  # required by deploy.js task to terminate 
+   parameters:
+     memory: 256M
+     disk-quota: 256M
+   
+   requires:
+    #### Resources extracted from CAP configuration ####
+    - name: mycap2-db
+    - name: mycap2-uaa
+
+   provides:
+    - name: srv-binding    # required by consumers of CAP services (e.g. approuter)
+      properties:
+        srv-url: ${default-url}
+
+ ############################################################
+ - name: mycap2-ui
+   type: nodejs
+   path: app
+   parameters:
+     memory: 256M
+     disk-quota: 256M
+   requires:
+     - name: mycap2-uaa
+     - name: srv-binding
+       group: destinations
+       properties:
+         forwardAuthToken: true
+         strictSSL: true
+         name: srv-binding
+         url: ~{srv-url}
+ ##############    SIDECAR MODULE   #########################
+ - name: db
+    
+   type: hdb
+   path: gen/db  
+   parameters:
+     app-name: mycap2-db  
+   requires:
+    #### Hana and xsuaa resources extracted from CAP configuration ####
+    - name: mycap2-db
+ ############################################################
+
+
+##############  RESOURCES  ##################################
+resources:
+ ##### Services extracted from CAP configuration  ####
+ ##### 'service-plan' can be configured via 'cds.requires.<name>.vcap.plan'
+ - name: mycap2-db
+   type: com.sap.xs.hdi-container 
+   
+   parameters:
+     service: hanatrial
+   properties:
+     hdi-service-name: ${service-name}   # required for Java case
+############################################################
+ - name: mycap2-uaa
+   type: org.cloudfoundry.managed-service
+   parameters:
+     service-plan: application
+     service: xsuaa
+     path: ./xs-security.json
