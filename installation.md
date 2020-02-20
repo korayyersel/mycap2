@@ -15,6 +15,12 @@ cds  #> test-run it
  ```bash
  npm install -g grunt-cli
  ```
+ 
+ 5. MBT Installation
+  ```bash
+ npm install -g mbt
+  ```
+  
  5. Install Chocolatey https://chocolatey.org/docs/installation#install-with-cmdexe (Run as Admin!)
  
  6. Install Node.js Long Term Support (LTS) version, SQLite, make, curl (command-line client for URLs), jq (lightweight and flexible command-line JSON processor)
