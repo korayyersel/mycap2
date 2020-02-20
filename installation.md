@@ -16,7 +16,7 @@ cds  #> test-run it
  npm install -g grunt-cli
  ```
  
- 5. MBT Installation
+ 5. Install mbt
   ```bash
  npm install -g mbt
   ```
