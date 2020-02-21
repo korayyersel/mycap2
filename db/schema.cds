@@ -12,3 +12,14 @@ entity Authors {
         name  : String;
         books : Association to many Books on books.author = $self;
 }
+
+entity AuthorsAccessRestriction {
+    key ID    : Integer;
+        name  : String;
+        country:String;
+}
+
+entity BooksCustomHandler {
+    key ID    : Integer;
+        title  : String;
+}

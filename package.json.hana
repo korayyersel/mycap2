@@ -1,0 +1,29 @@
+{
+  "name": "mycap2",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "ISC",
+  "dependencies": {
+    "@sap/audit-logging": "^3.1.0",
+    "@sap/cds": "^3",
+    "@sap/xssec": "^2.2.4",
+    "express": "^4",
+    "hdb": "^0.17.1",
+    "passport": "^0.4.1"
+  },
+  "scripts": {
+    "start": "npx cds run",
+    "build:mta": "cds build/all && mbt build -p=cf"
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "hana"
+      },
+      "uaa": {
+        "kind": "xsuaa"
+      }
+    }
+  }
+}
