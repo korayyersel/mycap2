@@ -7,13 +7,13 @@
             "target": "$1",
             "localDir": "webapp/",
             "authenticationType": "xsuaa",
-            "scope": "$XSAPPNAME.mycap2role"
+            "scope": "$XSAPPNAME.mycap2role"
         },
         {
             "source": "^(.*)$",
             "destination": "srv-binding",
             "authenticationType": "xsuaa",
-            "scope": "$XSAPPNAME.mycap2role"
+            "scope": "$XSAPPNAME.mycap2role"
         }
     ]
 }
