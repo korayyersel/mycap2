@@ -31,7 +31,8 @@
         "users": {
           "koray": {
             "roles": [
-              "mycap2role"
+              "mycap2role",
+              "BookAdmin"
             ],
             "attributes": {
               "country": "CH"

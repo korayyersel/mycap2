@@ -23,3 +23,8 @@ entity BooksCustomHandler {
     key ID    : Integer;
         title  : String;
 }
+
+entity BooksReadWriteAccessRestriction {
+    key ID    : Integer;
+        title  : String;
+}

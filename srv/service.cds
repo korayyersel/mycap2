@@ -9,4 +9,8 @@ service CatalogService @(requires : 'mycap2role') {
         to    : 'mycap2role',
         where : 'country = $user.country'
     }]) as projection on qperiordemo.AuthorsAccessRestriction;
+
+    entity BooksReadWriteAccessRestriction @(restrict: [ 
+    { grant: ['READ','WRITE'], to: 'BookAdmin' },{ grant: ['READ'], to: 'BookCommon' }]) 
+    as projection on qperiordemo.BooksReadWriteAccessRestriction;
 }
